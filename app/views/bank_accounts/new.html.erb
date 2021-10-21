@@ -1,0 +1,14 @@
+<div class="container bg-white contain">
+  <%= render partial: 'layouts/dashboard' %>
+  <div class="row justify-content-center text-dark">
+    <h1 class="col-sm-7 text-dark">New Bank Account</h1>
+  </div>
+
+  <%= render 'form', bank_account: @bank_account %>
+  <br>
+  <div class="row justify-content-center text-dark">
+      <div class="col-sm-4 ">
+          <%= link_to 'Home', root_path, :class => "btn btn-dark text-white"  %>
+      </div>
+  </div>
+</div>

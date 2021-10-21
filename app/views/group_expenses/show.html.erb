@@ -1,0 +1,32 @@
+<div class = 'back'>
+  <div class="container bg-white contain">
+    <%= render partial: 'layouts/dashboard' %>
+    <h1>Group Payers</h1>
+    
+    <table class='table'>
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Lent</th>
+          <th>Borrow</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @group_expense.group_payers.each do |group_payer| %>
+          <tr>
+            <td><%= User.find(group_payer.user_id).email %></td>
+            <td><%= group_payer.lent %></td>
+            <td><%= group_payer.borrow %></td>
+            <td>
+              <%= simple_form_for @group_expense, :action => edit_group_expense_path do |f| %>
+                <%= hidden_field_tag(:user_id, group_payer.user_id ) %>
+                <%= f.button :submit, "Settle Up" %>
+            </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

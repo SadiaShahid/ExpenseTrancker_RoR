@@ -1,0 +1,49 @@
+
+<body class="account_back">
+  <div class="row justify-content-center text-dark">
+    <div class="col-sm-12">
+  <div data-controller= 'group'>
+
+    <%= simple_form_for @group_expense do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+    <div class="form-control">
+      <% @group =Group.find(params[:group_id]) %>
+      <%= f.input :group_id, collection: [[@group.name, @group.id]], include_blank: false %>
+      <%= f.input :amount, required: true, input_html: { min: '1', 'data-group-target': 'amount','data-action': 'change->group#confirm'}%>
+      <%= f.input :divided, label: 'Divided By', as: :select, collection: ['Equally','By Amount','By Percentage'], input_html: { 'data-group-target': 'type', 'data-action': 'change->group#check' }, required: true %>
+      
+      <div>
+      <div  data-group-target='payersFields'>
+        <table>
+          <tbody>
+            <% @group.group_users.each do |group_user| %>
+              <%= f.simple_fields_for :group_payers do |p| %>
+                <tr>
+                <td>
+                <%= p.input :user_id, as: :boolean, label:group_user.user.email,  input_html: { 'data-group-target': 'payers', 'data-action': 'change->group#check'}, checked_value: group_user.user.id, unchecked_value: nil %>
+                </td>
+                <td>
+                <%= p.input :payable, required: true, input_html: { min: '0', 'data-group-target': 'payable', 'data-value': group_user.user.id, 'data-action': 'change->group#confirm'}, readonly: true, hint: 'For "By Amount" and "By Percentage"' %>
+                </td>
+                <td>
+                <%= p.input :paid, required: true, input_html: { min: '0', 'data-group-target': 'paid', 'data-group-value': group_user.user.id, 'data-action': 'change->group#confirm'}, readonly: true, hint: 'You have to select user first' %>
+                </td>
+                </tr>
+              <% end %>
+            
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      </div> 
+    </div>
+    <div class="form-actions">
+      <%= f.button :submit, disabled: true, 'data-group-target'=> 'btn', error: 'Amount does not match the Paid/Payable amount', title: "Make sure your amount paid and payble are equal to total amount" %>
+    </div>
+
+    <% end %>
+  </div>
+  </div>
+  </div>
+</body>

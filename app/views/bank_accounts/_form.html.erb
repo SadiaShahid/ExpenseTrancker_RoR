@@ -1,0 +1,26 @@
+<body class="account_back">
+  <%= simple_form_for bank_account, :validate => true do |form| %>
+    
+
+    <div class="row justify-content-center text-dark">
+      <div class="col-sm-4">
+        <div class="mb-3">
+          
+          <%= form.input :bank_name %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.input :acc_no, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.input :balance, class: "form-control", input_html: { min: '1'} %>
+        </div>
+
+        <%= form.submit "Make Account", class: "btn btn-dark text-white"%>
+            
+      </div>
+    </div>
+    
+  <% end %>
+</body>

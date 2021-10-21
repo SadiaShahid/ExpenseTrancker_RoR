@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Group expense:</strong>
+  <%= @group_payer.group_expense_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @group_payer.user_id %>
+</p>
+
+<p>
+  <strong>Integer:</strong>
+  <%= @group_payer.integer %>
+</p>
+
+<p>
+  <strong>Lent:</strong>
+  <%= @group_payer.lent %>
+</p>
+
+<p>
+  <strong>Borrow:</strong>
+  <%= @group_payer.borrow %>
+</p>
+
+<%= link_to 'Edit', edit_group_payer_path(@group_payer) %> |
+<%= link_to 'Back', group_payers_path %>

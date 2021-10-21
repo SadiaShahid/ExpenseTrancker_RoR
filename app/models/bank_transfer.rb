@@ -1,0 +1,3 @@
+class BankTransfer < Transaction
+    
+end

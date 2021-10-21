@@ -1,0 +1,76 @@
+<body class="dashboard_back">
+
+<!-- Nav tabs -->
+<br>
+<div class="container bg-light c_dash" data-controller="dashboard">
+  <ul class="nav nav-pills nav-fill" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="dashboard-tab" data-bs-toggle="tab" data-bs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="true", data-dashboard-target="dashActive" >Dashboard</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="transaction-tab" data-bs-toggle="tab" data-bs-target="#transaction" type="button" role="tab" aria-controls="transaction" aria-selected="false", data-dashboard-target="transActive">Transactions</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="account-tab" data-bs-toggle="tab" data-bs-target="#account" type="button" role="tab" aria-controls="account" aria-selected="false">Accounts</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="group-tab" data-bs-toggle="tab" data-bs-target="#group" type="button" role="tab" aria-controls="group" aria-selected="false">Group</button>
+    </li>
+    
+      <%= link_to "Sign-Out", destroy_user_session_path, method: :delete, 
+      :class => "btn btn-dark text-white" %>
+    
+
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div class="tab-pane active" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+      <br>
+      <%= render partial:"transactions/transaction_simpleform" %>
+      <br>
+      <div class="row ">
+        <div class="col-4">
+          <p class='h4'>Statistics</p>
+          <table class = "table"  >
+            <tr>
+              <th scope="col">Total Expense</th>
+              <th scope="col">Total Income</th>
+              <th scope="col">Wallet Credit</th>
+              <th scope="col">Bank Balance</th>
+            </tr>
+              <tr>
+              <% @comparison.each do |comparison| %>
+                <td scope="row"><%= comparison[1] %></td>
+              <% end %>
+            </tr>
+          </table> 
+        </div>
+        <div class='col-8'>
+        <%= pie_chart @comparison, donut: true %> 
+        </div>
+        <div class='row justify-content-center'>
+        <div class="col-9">
+          <%= line_chart @comparison, suffix: "Rs" %>
+        </div>
+        </div>
+      </div>
+      
+    </div >
+    
+    <div class="tab-pane" id="transaction" role="tabpanel" aria-labelledby="transaction-tab">
+      <%= render partial: "transactions/trans_form",  locals:{transactions:@transactions}%>
+    </div>
+    <div class="tab-pane" id="account" role="tabpanel" aria-labelledby="account-tab">
+    
+      <%= render partial: "bank_accounts/account",  locals:{bank_accounts:@bank_accounts}%>
+    </div>
+    <div class="tab-pane" id="group" role="tabpanel" aria-labelledby="group-tab">
+    
+      <%= render partial: "layouts/group"%>
+    </div>
+    
+    
+  </div>
+</div>
+</body>

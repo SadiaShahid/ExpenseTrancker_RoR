@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Group Payers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Group expense</th>
+      <th>User</th>
+      <th>Integer</th>
+      <th>Lent</th>
+      <th>Borrow</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @group_payers.each do |group_payer| %>
+      <tr>
+        <td><%= group_payer.group_expense_id %></td>
+        <td><%= group_payer.user_id %></td>
+        <td><%= group_payer.integer %></td>
+        <td><%= group_payer.lent %></td>
+        <td><%= group_payer.borrow %></td>
+        <td><%= link_to 'Show', group_payer %></td>
+        <td><%= link_to 'Edit', edit_group_payer_path(group_payer) %></td>
+        <td><%= link_to 'Destroy', group_payer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Group Payer', new_group_payer_path %>

@@ -1,0 +1,36 @@
+<%= link_to "Add new Group", new_group_path, :class => "btn btn-success text-white"%>
+<h3>Group</h3>
+<table class='table'>
+  <thead>
+    <tr>
+      <th>Name</th>
+      
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @groups.each do |group| %>
+      <tr>
+        <td><%= group.name %></td>
+        
+        <td><%= link_to 'Show', group, :class => "btn btn-success text-white" %></td>
+        <%
+=begin%>
+ <td><%= link_to 'Edit', edit_group_path(group) %></td> 
+<%
+=end%>
+        <td><%= link_to 'Destroy', group, :class => "btn btn-success text-white", method: :delete, data: { confirm: 'Are you sure?' } if !group.group_users.where( role: "owner" ).empty? && group.group_users.where( role: "owner" ).first.user == current_user %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+
+
+
+
+<br>
+

@@ -1,0 +1,79 @@
+
+<div class="row " data-controller="dashboard">
+  <div class ='col-6'>
+    <div class="text-dark"  >
+      <%= month_calendar do |date| %>
+        <strong><%=date%></strong>
+        <button class="btn btn-success btn-xs"  data-action="click->dashboard#show"   data-value='<%= date %>'>
+          Show
+        </button>
+      <% end %>
+    
+    </div>
+  </div>
+  <div class='col-6'>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle d-none" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" data-dashboard-target="addBtn" >
+        Add
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" >
+        <li><button class="dropdown-item" data-action="click->dashboard#income">Income</button></li>
+        <li><button class="dropdown-item" data-action="click->dashboard#income">Expense</button></li>
+        <li><button class="dropdown-item" data-action="click->dashboard#income">Bank Transfer</button></li>
+      </ul>
+    </div>
+    
+    
+    <div class="d-none" name="transaction_form" data-dashboard-target="transactionForm">
+      <%= simple_form_for @transaction, :validate => true do |f| %>
+          
+        <div class="row" >
+          <div class="col-sm-12" >
+
+              <%= f.error_notification %>
+              <%=  f.input :date, as: :date, required: true, 
+              input_html: { 'data-dashboard-target': 'date'}, html5: true %>
+              <%= f.input :type,
+              input_html: { 'data-dashboard-target': 'transferType' }, class: "d-none",
+              readonly: true %>
+              <%= f.input :amount, required: true, input_html: { min: '1'} %>
+            <div class= "d-none" data-dashboard-target="category">
+              <%= f.input :category, as: :select, collection: Transaction.categories.keys,
+              required: true, input_html: { 'data-dashboard-target': 'catReq'} %>
+            </div>
+            <div data-dashboard-target="account">
+              <%= f.input :transactionable_type, label: 'Account', 
+              collection: @user_accounts, required: true,
+                input_html: { 'data-dashboard-target': 'transReq'} %>
+
+            </div>
+            <div class= "d-none" data-dashboard-target="fromAccount">
+              <%= f.input :transfer_from_type, label: 'From', 
+              collection: @user_accounts, required: true,
+              input_html: { 'data-dashboard-target': 'fromtheAccount', 
+              'data-action': 'change->dashboard#handleChange' } %>
+            </div>
+            <div class= "d-none" data-dashboard-target= "toAccount">
+              <%= f.input :transfer_to_type, label: 'To', 
+              collection: @user_accounts, required: true ,
+              input_html: { 'data-dashboard-target': 'totheAccount'} %>
+            </div>
+
+            <br>
+              <%= f.button :submit, "Make Transaction" ,class: "trans-button text-white",
+              input_html: {'data-action': 'click->dashboard#activeTab' }, 
+              :'data-no-turbolink' => true %>
+              <br> 
+            
+          </div>
+        </div>
+      <% end %>
+     
+    </div>
+  </div>
+</div>
+
+
+  
+
+

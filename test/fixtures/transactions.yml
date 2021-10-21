@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2021-08-28 19:08:02
+  amount: 1.5
+  category: 1
+  type: 
+
+two:
+  date: 2021-08-28 19:08:02
+  amount: 1.5
+  category: 1
+  type: 

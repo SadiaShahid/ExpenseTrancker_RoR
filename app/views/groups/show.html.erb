@@ -1,0 +1,63 @@
+<body class = 'back'>
+<div class="container bg-white contain">
+  <%= render partial: 'layouts/dashboard' %>
+
+  <p>
+    <strong>Name:</strong>
+    <%= @group.name %>
+  </p>
+
+ 
+  <h4>Users</h4>
+  <% @group.group_users.each do |group_user| %>
+    <div>
+      <%= group_user.user.email   %>
+      <td>
+       
+      <% if current_user == @owner && group_user.user.id!=@owner.id %>
+              <%= link_to "Remove member",
+              group_group_user_path(@group, group_user), 
+              method: :delete %>
+      <% end %> 
+
+      </td>
+    </div>
+  <% end %>
+    <% if @owner == current_user %>
+    <h4>Invite User</h4>
+    <%= simple_form_for [@group, GroupUser.new] do |f| %>
+      <%= f.input :email, required: true %>
+      <%= f.button :submit, "Invite" %>
+    <% end %>
+  <% end %>
+  
+<h1>Group Expense</h1>
+<table class='table'>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Amount</th>
+      <th>Created By</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @group.group_expenses.each do |group_expense| %>
+
+      <tr>
+        <td><%= @group.name %></td>
+        <td><%= group_expense.amount %></td>
+        <td><%= User.find(group_expense.user_id).email %></td>
+        <td><%= link_to 'Open', group_expense, :class => "btn btn-success text-white" %></td>
+      </tr>
+      
+    <% end %>
+
+  </tbody>
+</table>
+
+<%= link_to "Add Group Expense", new_group_expense_path(group_id: @group.id), :class => "btn btn-success text-white"%>
+
+</div>
+</body>
