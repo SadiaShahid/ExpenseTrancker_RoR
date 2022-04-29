@@ -39,7 +39,7 @@ class PublicController < ApplicationController
   def transaction
     @transaction = Transaction.new
     @user_accounts = ["Wallet"] + current_user.bank_accounts.map(&:bank_name)
-    @transactions = current_user.transactions
+    @transactions = current_user.transactions.order('created_at DESC')
 
     # @invites = User.where(invited_by_id: current_user.id)
     # byebug

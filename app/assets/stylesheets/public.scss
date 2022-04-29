@@ -1,72 +1,77 @@
 .body {
-    background-image: image-url("back6.png");
-    // background-repeat: no-repeat;
-    //height: 230;
-    background-size:cover;
+  background-image: image-url("back6.png");
+  // background-repeat: no-repeat;
+  //height: 230;
+  background-size: cover;
 }
-.login_back{
-    background-image: image-url("back6.png");
-    background-repeat: no-repeat;
-    //height: 230;
-    background-size:cover;
+.navbar {
+  .navbar-brand:hover,
+  .icon:hover {
+    background-color: transparent;
+  }
+  .fa {
+    color: black;
+  }
 }
-.signup_back{
-    background-image: image-url("back6.png");
-    background-repeat: no-repeat;
-    //height: 230;
-    background-size:cover;
+.login_back {
+  background-image: image-url("back6.png");
+  background-repeat: no-repeat;
+  //height: 230;
+  background-size: cover;
 }
-.account_back{
-    background-image: image-url("back6.png");
-    background-repeat: no-repeat;
-    //height: 230;
-    background-size:cover;
+.signup_back {
+  background-image: image-url("back6.png");
+  background-repeat: no-repeat;
+  //height: 230;
+  background-size: cover;
 }
-.dashboard_back{
-    background-image: image-url("back6.png");
-    background-repeat: no-repeat;
-    //height: 230;
-    background-size:cover;
+.account_back {
+  background-image: image-url("back6.png");
+  background-repeat: no-repeat;
+  //height: 230;
+  background-size: cover;
 }
-.c_dash{
-    padding: 15px;
-    
+.dashboard_back {
+  background-image: image-url("back6.png");
+  background-repeat: no-repeat;
+  //height: 230;
+  background-size: cover;
+}
+.c_dash {
+  padding: 15px;
 }
 .nav-link {
-    color: black;
+  color: black;
 }
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    color: #fff;
-    background-color: rgb(42, 53, 67);
-}
-
-#myTab{
-    font-size: large;
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: rgb(42, 53, 67);
 }
 
-.trans-button{
-    color: white;
-    background-color: rgb(42, 53, 67);
-    
+#myTab {
+  font-size: large;
 }
 
-.btn{
-    color: white;
-    background-color: rgb(42, 53, 67);
+.trans-button {
+  color: white;
+  background-color: rgb(42, 53, 67);
 }
-.p_alert{
-    font-size: medium;
-    
-    
+
+.btn {
+  color: white;
+  background-color: rgb(42, 53, 67);
 }
-.p_notice{
-    font-size: medium;
-    
+.p_alert {
+  font-size: medium;
 }
-.contain{
-    width: 700px;
-    border-radius: 25px;
-    padding: 10px;
+.p_notice {
+  font-size: medium;
+}
+.contain {
+  width: 700px;
+  border-radius: 25px;
+  padding: 10px;
 }
 // .add-trans{
 //     float: left;

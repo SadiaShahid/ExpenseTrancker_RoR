@@ -40,11 +40,13 @@
  
 <%
 =end%>
-<div data-controller="ajax">
-  <button class='btn btn-success' data-action='click->ajax#show' id="fetch">Fetch Transactions</button>
-  <table class='table' id='table' data-ajax-target="table">
-  </table>
-</div>
 
 
 
+<%
+=begin%>
+ <%= link_to "AJAX Transactions", api_v1_transactions_path, :class => "btn btn-success text-white"%> 
+<%
+=end%>
+
+<button class='btn btn-success'>Fetch Transactions</button>

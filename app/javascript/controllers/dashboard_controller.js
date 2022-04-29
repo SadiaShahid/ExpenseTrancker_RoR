@@ -1,4 +1,5 @@
 import { Controller } from 'stimulus';
+import axios from "axios";
 export default class extends Controller {
     static targets = ['transactionForm',
                       'category',
@@ -13,7 +14,9 @@ export default class extends Controller {
                       'catReq',
                       'transReq',
                       'date',
-                      'addBtn'
+                      'addBtn',
+                      'transactions',
+                      'amount'
 
                     ]
   connect() {
@@ -72,13 +75,8 @@ export default class extends Controller {
 
   handleChange ()
   {
-
-     console.log("hello from Change")
-    
-    
     if(this.fromtheAccountTarget.options[1].selected)
     {
-      // console.log(event.currentTarget.dataset)
       this.totheAccountTarget.options[1].hidden = true
     }
   }
@@ -87,11 +85,40 @@ export default class extends Controller {
     console.log("hello from activeTab")
     this.dashActiveTarget.classList.remove('active')
     this.transActiveTarget.classList.add('active')
-
   }
 
   hideForm()
   {
     this.transactionFormTarget.classList.add('d-none')
+  }
+
+
+  submitform(){
+    this.transactionsTarget.innerHTML +='<tr><th scope="row">'+this.dateTarget.value+'</th><td scope="row">'+this.amountTarget.value+'</td><td scope="row">'+this.transferTypeTarget.value+'</td><td scope="row"></td></tr>'
+  }
+
+  makeTransaction(){
+    const csrfToken = document.querySelector("meta[name=csrf-token]").content
+    axios.defaults.headers.common["X-CSRF-Token"] = csrfToken
+    axios({
+      method: 'post',
+      url: 'http://localhost:3000/transactions',
+      data: {
+        date: this.dateTarget.value,
+        type: this.transferTypeTarget.value,
+        amount: this.amountTarget.value,
+        category: this.catReqTarget.value,
+        transactionable_type: this.transReqTarget.value,
+        transfer_from_type: this.fromtheAccountTarget.value,
+        transfer_to_type: this.totheAccountTarget.value
+      }
+      })
+      .then(function (response) {
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+     
+
   }
 }

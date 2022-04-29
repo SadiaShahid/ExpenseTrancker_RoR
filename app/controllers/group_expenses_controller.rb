@@ -30,6 +30,7 @@ class GroupExpensesController < ApplicationController
 
   # POST /group_expenses or /group_expenses.json
   def create
+    # debugger
     session[:return_to] ||= request.referer
     h = params[:group_expense][:group_payers_attributes]
     h.each do |key, value|

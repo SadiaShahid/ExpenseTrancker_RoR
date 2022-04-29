@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  read_at: 2021-10-22 16:43:52
+  action: MyString
+  transaction_id: 1
+
+two:
+  user_id: 1
+  read_at: 2021-10-22 16:43:52
+  action: MyString
+  transaction_id: 1

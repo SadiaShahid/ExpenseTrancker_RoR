@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :transactions
   has_many :group_users
   has_many :groups, through: :group_users
+  has_many :notifications
   
   after_create do |user|
     user.create_wallet

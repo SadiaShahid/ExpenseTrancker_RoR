@@ -13,17 +13,23 @@ Rails.application.routes.draw do
 
   devise_for :users, path: '', path_names: { sign_in: "login", sign_up: "register", invitation: 'invite' }
   resources :wallets, :only => [:new, :create, :edit]
-  resources :transactions, :only => [:index, :new, :create, :destroy]
+  resources :transactions 
   resources :income, controller: "transactions", type: "income"
+
+  
   resources :expense, controller: "transactions", type: "expense"
   resources :bank_transfer, controller: "transactions", type: "bank_transfer"
   resources :bank_accounts
-
-#   namespace :api do
-#   namespace :v1 do
-#     resources :transactions, only: [:index]
-#   end
-# end
+  resources :notifications do
+    collection do
+      post :mark_as_read
+    end
+  end
+  namespace :api do
+    namespace :v1 do
+      resources :transactions, only: [:index, :show]
+    end
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   get "transaction" => "public#transaction", as: :transfer

@@ -26,17 +26,15 @@
     
     <div class="d-none" name="transaction_form" data-dashboard-target="transactionForm">
       <%= simple_form_for @transaction, :validate => true do |f| %>
-          
         <div class="row" >
           <div class="col-sm-12" >
-
               <%= f.error_notification %>
               <%=  f.input :date, as: :date, required: true, 
               input_html: { 'data-dashboard-target': 'date'}, html5: true %>
               <%= f.input :type,
               input_html: { 'data-dashboard-target': 'transferType' }, class: "d-none",
               readonly: true %>
-              <%= f.input :amount, required: true, input_html: { min: '1'} %>
+              <%= f.input :amount, required: true, input_html: { min: '1', 'data-dashboard-target': 'amount'} %>
             <div class= "d-none" data-dashboard-target="category">
               <%= f.input :category, as: :select, collection: Transaction.categories.keys,
               required: true, input_html: { 'data-dashboard-target': 'catReq'} %>
@@ -45,7 +43,6 @@
               <%= f.input :transactionable_type, label: 'Account', 
               collection: @user_accounts, required: true,
                 input_html: { 'data-dashboard-target': 'transReq'} %>
-
             </div>
             <div class= "d-none" data-dashboard-target="fromAccount">
               <%= f.input :transfer_from_type, label: 'From', 
@@ -58,19 +55,46 @@
               collection: @user_accounts, required: true ,
               input_html: { 'data-dashboard-target': 'totheAccount'} %>
             </div>
-
             <br>
-              <%= f.button :submit, "Make Transaction" ,class: "trans-button text-white",
-              input_html: {'data-action': 'click->dashboard#activeTab' }, 
-              :'data-no-turbolink' => true %>
-              <br> 
-            
+            <div data-controller='ajax'>
+              <%
+=begin%>
+ <%= link_to 'Make Transaction', root_path, 'data-action'=>'click->ajax#notification click->dashboard#makeTransaction' %> 
+<%
+=end%>
+              <%
+=begin%>
+ <button type= "button" class="btn btn-success" data-action="click->ajax#notification click->dashboard#makeTransaction" > submit</button> 
+<%
+=end%>
+           
+ <%= f.button :button, "Make Transaction" ,class: "trans-button text-white", 'data-action'=>'click->ajax#notification click->dashboard#makeTransaction', :data => {:disable_with => "Saving..."} %> 
+
+            </div>
+           
+            <br>
           </div>
         </div>
       <% end %>
-     
     </div>
   </div>
+  <table class="table" id='table' >
+    <thead class='border-2 border-dark'>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Type</th>
+        <th scope="col">To</th>
+        <th scope="col">From</th>
+        <th scope="col">Category</th>
+        
+      </tr>
+    </thead>
+
+    <tbody data-dashboard-target='transactions' id='transactions'>
+      <%= render 'transactions/data', transactions: @transactions %>
+    </tbody>
+  </table>
 </div>
 
 

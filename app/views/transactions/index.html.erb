@@ -1,38 +1,17 @@
-<div class='text-dark'>
-<h3>Transactions</h3>
-
-<table class="table" >
-  <thead>
-    <tr>
-      <th scope="col">Date</th>
-      <th scope="col">Amount</th>
-      <th scope="col">From</th>
-      <th scope="col">To</th>
-      <th scope="col">Category</th>
-      <th scope="col">Type</th>
-
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @transactions.each do |transaction| %>
+<table class="table" id='table' >
+    <thead class='border-2 border-dark'>
       <tr>
-        <th scope="row"><%= transaction.date %></th>
-        <td scope="row"><%= transaction.amount %></td>
-        <td scope="row"><%= transaction.transfer_from_type %></td>
-        <td scope="row"><%= transaction.transfer_to_type %></td>
-        <% if transaction.category != nil %>
-          <td scope="row"><%= transaction.category %></td>
-        <% else %>
-          <td scope="row"><%= '---' %></td>
-        <% end %>
-        <td scope="row"><%= transaction.type %></td>
-        <td scope="row"><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-dark text-white" %></td>
+        <th scope="col">Date</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Type</th>
+        <th scope="col">To</th>
+        <th scope="col">From</th>
+        <th scope="col">Category</th>
         
       </tr>
-    <% end %>
-  </tbody>
-</table>
-</div>
+    </thead>
 
+    <tbody data-dashboard-target='transactions' id='transactions'>
+      <%= render 'transactions/data', transactions: @transactions %>
+    </tbody>
+  </table>

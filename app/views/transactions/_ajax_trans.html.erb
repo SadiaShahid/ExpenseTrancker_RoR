@@ -1,0 +1,13 @@
+<tr>
+  <th scope="row"><%= transaction.date %></th>
+  <td scope="row"><%= transaction.amount %></td>
+  <td scope="row"><%= transaction.type %></td>
+  <td scope="row"><%= transaction.transfer_to_type %></td>
+  <td scope="row"><%= transaction.transfer_from_type %></td>
+  <% if transaction.category != nil %>
+    <td scope="row"><%= transaction.category %></td>
+  <% else %>
+    <td scope="row"><%= '---' %></td>
+  <% end %>
+  <td scope="row"><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-dark text-white" %></td>
+</tr>

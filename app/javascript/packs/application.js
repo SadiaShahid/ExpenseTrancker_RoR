@@ -9,7 +9,7 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import 'controllers'
 import "chartkick/chart.js"
-
+import axios from "axios";
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

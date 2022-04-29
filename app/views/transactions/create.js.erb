@@ -1,0 +1,14 @@
+var body = document.getElementById("transactions");
+body.innerHTML = "<%= j render 'transactions/ajax_trans', transaction: @transaction %>" + body.innerHTML;
+// clear and focus on input
+var amount = document.getElementById("transaction_amount");
+var category = document.getElementById("transaction_category");
+var account = document.getElementById("transaction_transactionable_type");
+var from = document.getElementById("transaction_transfer_from_type");
+var to = document.getElementById("transaction_transfer_to_type");
+amount.value = '';
+category.value = '';
+account.value = '';
+from.value = '';
+to.value = '';
+amount.focus();
